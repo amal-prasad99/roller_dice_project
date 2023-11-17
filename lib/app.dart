@@ -6,16 +6,13 @@ class RollerDiceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Container(
+      child: Scaffold(
         appBar: AppBar(
           title: const Text('Roller Dice App'),
           backgroundColor: Colors.amber.shade300,
         ),
-        body: const GraidentContainer(colors: [
-          Color.fromARGB(255, 9, 82, 141),
-          Color.fromARGB(255, 149, 3, 171)
-        ]),
+        body: const GraidentContainer(),
       ),
     );
   }

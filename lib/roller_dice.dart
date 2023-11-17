@@ -48,13 +48,12 @@ class _RollerDiceState extends State<RollerDice> {
 
   void gameResult() {
     String winnerMsg;
-
     if (totalP1 > totalP2) {
       winnerMsg = 'Player One Wins';
     } else if (totalP2 > totalP1) {
       winnerMsg = 'Player Two Wins';
     } else {
-      winnerMsg = 'Both Lose...';
+      winnerMsg = 'Both Lose...!';
     }
 
     showDialog(
@@ -63,10 +62,16 @@ class _RollerDiceState extends State<RollerDice> {
           return AlertDialog(
             title: Text('Game Over'),
             content: Text(winnerMsg),
-            actions: [],
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Try Again'),
+              ),
+            ],
           );
         });
-
     totalP1 = 0;
     countP1 = 0;
     totalP2 = 0;
@@ -82,7 +87,7 @@ class _RollerDiceState extends State<RollerDice> {
           'assets/images/dice-$roleDiceNum.png',
           width: 200,
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Row(
@@ -110,8 +115,78 @@ class _RollerDiceState extends State<RollerDice> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: const Color.fromARGB(255, 255, 255, 255),
+              ),
+              width: 100,
+              height: 100,
+              child: Center(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        'Round',
+                        style: TextStyle(
+                          color: Colors.amber.shade600,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '$countP1',
+                      style: TextStyle(
+                        color: Colors.amber.shade600,
+                        fontSize: 55,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: const Color.fromARGB(255, 255, 255, 255),
+              ),
+              width: 100,
+              height: 100,
+              child: Center(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        'Round',
+                        style: TextStyle(
+                          color: Colors.amber.shade600,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '$countP2',
+                      style: TextStyle(
+                        color: Colors.amber.shade600,
+                        fontSize: 55,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 25,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -119,29 +194,59 @@ class _RollerDiceState extends State<RollerDice> {
             Container(
               width: 100,
               height: 100,
-              color: const Color.fromARGB(255, 255, 255, 255),
-              child: Center(
-                child: Text(
-                  '0',
-                  style: TextStyle(
-                    color: Colors.amber.shade600,
-                    fontSize: 55,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      'Total',
+                      style: TextStyle(
+                        color: Colors.amber.shade600,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
-                ),
+                  Text(
+                    '$totalP1',
+                    style: TextStyle(
+                      color: Colors.amber.shade600,
+                      fontSize: 55,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
               width: 100,
               height: 100,
-              color: const Color.fromARGB(255, 255, 255, 255),
-              child: Center(
-                child: Text(
-                  '0',
-                  style: TextStyle(
-                    color: Colors.amber.shade600,
-                    fontSize: 55,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      'Total',
+                      style: TextStyle(
+                        color: Colors.amber.shade600,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
-                ),
+                  Text(
+                    '$totalP2',
+                    style: TextStyle(
+                      color: Colors.amber.shade600,
+                      fontSize: 55,
+                    ),
+                  ),
+                ],
               ),
             )
           ],
