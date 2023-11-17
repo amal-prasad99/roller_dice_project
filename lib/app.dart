@@ -9,7 +9,14 @@ class RollerDiceApp extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Roller Dice App'),
+          title: const Text(
+            'Roller Dice App',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+            ),
+          ),
           backgroundColor: Colors.amber.shade300,
         ),
         body: const GraidentContainer(),

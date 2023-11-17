@@ -27,12 +27,15 @@ class HomePage extends StatelessWidget {
                 child: Text(
                   'Welcome \n To \nRollerDice',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 50),
+                  style: TextStyle(color: Colors.amber, fontSize: 50),
                 ),
               ),
               Builder(
                 builder: (BuildContext builderContext) {
                   return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.amber.shade600,
+                    ),
                     onPressed: () {
                       Navigator.push(
                         builderContext,
@@ -40,7 +43,16 @@ class HomePage extends StatelessWidget {
                             builder: (context) => RollerDiceApp()),
                       );
                     },
-                    child: const Text('New Game'),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'New Game',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),

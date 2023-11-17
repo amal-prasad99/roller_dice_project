@@ -16,6 +16,9 @@ class _RollerDiceState extends State<RollerDice> {
   var countP1 = 0;
   var totalP2 = 0;
   var countP2 = 0;
+  var difference = 0;
+  var p1tot = 0;
+  var p2tot = 0;
 
   bool isPlayerOneButtonDisabled = false;
   bool isPlayerTwoButtonDisabled = true;
@@ -49,10 +52,18 @@ class _RollerDiceState extends State<RollerDice> {
   void gameResult() {
     String winnerMsg;
     if (totalP1 > totalP2) {
-      winnerMsg = 'Player One Wins';
+      p1tot = totalP1;
+      p2tot = totalP2;
+      difference = totalP1 - totalP2;
+      winnerMsg = 'Player One Wins by $difference points.';
     } else if (totalP2 > totalP1) {
-      winnerMsg = 'Player Two Wins';
+      p2tot = totalP2;
+      p1tot = totalP1;
+      difference = totalP2 - totalP1;
+      winnerMsg = 'Player Two Wins $difference points.';
     } else {
+      p2tot = totalP2;
+      p1tot = totalP1;
       winnerMsg = 'Both Lose...!';
     }
 
@@ -60,8 +71,30 @@ class _RollerDiceState extends State<RollerDice> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Game Over'),
-            content: Text(winnerMsg),
+            title: const Text(
+              'Game Over',
+              style: TextStyle(fontSize: 30),
+              textAlign: TextAlign.center,
+            ),
+            content: Container(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    winnerMsg,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text('Player One Total: $p1tot'),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text('Player Two Total: $p2tot')
+                ],
+              ),
+            ),
             actions: [
               TextButton(
                 onPressed: () {
@@ -96,22 +129,36 @@ class _RollerDiceState extends State<RollerDice> {
             TextButton(
               onPressed: isPlayerOneButtonDisabled ? null : rollP1,
               style: TextButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 220, 3, 177),
-                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.amber.shade600,
+                  foregroundColor: const Color.fromARGB(255, 0, 0, 0),
                   textStyle: const TextStyle(
                     fontSize: 20,
                   )),
-              child: const Text('Player One'),
+              child: const Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Text(
+                  'Player One',
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
+                ),
+              ),
             ),
             TextButton(
               onPressed: isPlayerTwoButtonDisabled ? null : rollP2,
               style: TextButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 220, 3, 177),
-                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.amber.shade600,
+                  foregroundColor: const Color.fromARGB(255, 0, 0, 0),
                   textStyle: const TextStyle(
                     fontSize: 20,
                   )),
-              child: const Text('Player Two'),
+              child: const Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Text(
+                  'Player Two',
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
+                ),
+              ),
             ),
           ],
         ),
@@ -123,9 +170,8 @@ class _RollerDiceState extends State<RollerDice> {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: const Color.fromARGB(255, 255, 255, 255),
-              ),
+                  borderRadius: BorderRadius.circular(20),
+                  color: Color.fromARGB(255, 21, 21, 21)),
               width: 100,
               height: 100,
               child: Center(
@@ -155,7 +201,7 @@ class _RollerDiceState extends State<RollerDice> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: const Color.fromARGB(255, 255, 255, 255),
+                color: Color.fromARGB(255, 21, 21, 21),
               ),
               width: 100,
               height: 100,
@@ -196,7 +242,7 @@ class _RollerDiceState extends State<RollerDice> {
               height: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Color.fromARGB(255, 21, 21, 21),
               ),
               child: Column(
                 children: [
@@ -225,7 +271,7 @@ class _RollerDiceState extends State<RollerDice> {
               height: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Color.fromARGB(255, 21, 21, 21),
               ),
               child: Column(
                 children: [
